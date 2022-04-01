@@ -62,11 +62,11 @@ for PLUGIN_DIR in $PLUGIN_DIRS; do
     find . -name '*.i2p.public.txt' -exec rm -fv {} \;
     find . -name '*.public.txt' -exec rm -fv {} \;
     if [ -d vendor ]; then
-        rm -rv vendor || break
+        sudo rm -rv vendor || break
     fi
     make clean
     make distclean
     git clean -fd
-    #make all 2>&1 | tee "$MY_SCRIPT_DIR/release-build-$PLUGIN_NAME.log"
-    #make release 2>&1 | tee "$MY_SCRIPT_DIR/release-release-$PLUGIN_NAME.log"
+    make all 2>&1 | tee "$MY_SCRIPT_DIR/release-build-$PLUGIN_NAME.log"
+    make release 2>&1 | tee "$MY_SCRIPT_DIR/release-release-$PLUGIN_NAME.log"
 done
