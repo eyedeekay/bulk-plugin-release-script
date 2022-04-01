@@ -19,6 +19,7 @@ GIT_REMOTE_NAME="origin"
 
 for PLUGIN_DIR in $PLUGIN_DIRS; do
     cd "$PLUGIN_DIR" || exit 1
+    nano Makefile
     git checkout main 2>/dev/null || git checkout trunk 2>/dev/null || git checkout master 2>/dev/null
     GIT_BRANCH_NAME=$(git branch | grep '*' | sed 's/* //')
     #pwd
