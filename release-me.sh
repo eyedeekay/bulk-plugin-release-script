@@ -61,7 +61,9 @@ for PLUGIN_DIR in $PLUGIN_DIRS; do
     find . -name '*.i2p.txt' -exec rm -fv {} \;
     find . -name '*.i2p.public.txt' -exec rm -fv {} \;
     find . -name '*.public.txt' -exec rm -fv {} \;
-    rm -rv vendor || break
+    if [ -d vendor ]; then
+        rm -rv vendor || break
+    fi
     make clean
     make distclean
     git clean -fd
