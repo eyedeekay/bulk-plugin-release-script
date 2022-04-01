@@ -48,6 +48,8 @@ for PLUGIN_DIR in $PLUGIN_DIRS; do
     #get the last element of PLUGIN_DIR
     PLUGIN_NAME=$(echo "$PLUGIN_DIR" | rev | cut -f1 -d'/' | rev)
     grep -C 2 --color -Hn release Makefile > "$MY_SCRIPT_DIR/release-me-$PLUGIN_NAME.log"
+    grep -q "signer-dir" Makefile || bash -c "echo 'signer-dir not found' >> $MY_SCRIPT_DIR/release-fail-$PLUGIN_NAME.log; cat $MY_SCRIPT_DIR/release-fail-$PLUGIN_NAME.log; exit"
+    rm -f "$MY_SCRIPT_DIR/release-fail-$PLUGIN_NAME.log"
     make all
     #make release
 done
