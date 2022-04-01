@@ -55,7 +55,6 @@ for PLUGIN_DIR in $PLUGIN_DIRS; do
         echo "signer-dir not found"
         grep -C 2 --color -Hn signer-dir Makefile >> "$MY_SCRIPT_DIR/release-fail-$PLUGIN_NAME.log"
     fi
-    sleep 3s
     make all 2>&1 | tee "$MY_SCRIPT_DIR/release-build-$PLUGIN_NAME.log"
-    #make release 2>&1 | tee "$MY_SCRIPT_DIR/release-release-$PLUGIN_NAME.log"
+    make release 2>&1 | tee "$MY_SCRIPT_DIR/release-release-$PLUGIN_NAME.log"
 done
