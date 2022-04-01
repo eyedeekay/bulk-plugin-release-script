@@ -57,6 +57,5 @@ for PLUGIN_DIR in $PLUGIN_DIRS; do
     fi
     sleep 3s
     make all 2>&1 | tee "$MY_SCRIPT_DIR/release-build-$PLUGIN_NAME.log"
-    #make all || echo "failed on $PLUGIN_NAME" >> "$MY_SCRIPT_DIR/release-fail-$PLUGIN_NAME.log"; cat "$MY_SCRIPT_DIR/release-fail-$PLUGIN_NAME.log"; exit
-    #make release
+    #make release 2>&1 | tee "$MY_SCRIPT_DIR/release-release-$PLUGIN_NAME.log"
 done
