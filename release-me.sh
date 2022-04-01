@@ -9,8 +9,7 @@ $HOME/go/src/i2pgit.org/idk/terrarium
 $HOME/go/src/i2pgit.org/idk/reseed-tools
 $HOME/go/src/i2pgit.org/idk/railroad
 $HOME/go/src/i2pgit.org/idk/blizzard
-$HOME/go/src/i2pgit.org/idk/i2p.plugins.tor-manager
-"
+$HOME/go/src/i2pgit.org/idk/i2p.plugins.tor-manager"
 
 #PLUGIN_DIRS="$HOME/go/src/i2pgit.org/idk/i2p.plugins.tor-manager
 #"
@@ -56,6 +55,16 @@ for PLUGIN_DIR in $PLUGIN_DIRS; do
         echo "signer-dir not found"
         grep -C 2 --color -Hn signer-dir Makefile >> "$MY_SCRIPT_DIR/release-fail-$PLUGIN_NAME.log"
     fi
-    make all 2>&1 | tee "$MY_SCRIPT_DIR/release-build-$PLUGIN_NAME.log"
-    make release 2>&1 | tee "$MY_SCRIPT_DIR/release-release-$PLUGIN_NAME.log"
+    find . -name '*.i2p.private' -exec rm -fv {} \;
+    find . -name '*.i2p.public' -exec rm -fv {} \;
+    find . -name '*.i2p.key' -exec rm -fv {} \;
+    find . -name '*.i2p.txt' -exec rm -fv {} \;
+    find . -name '*.i2p.public.txt' -exec rm -fv {} \;
+    find . -name '*.public.txt' -exec rm -fv {} \;
+    rm -rv vendor || break
+    make clean
+    make distclean
+    git clean -fd
+    #make all 2>&1 | tee "$MY_SCRIPT_DIR/release-build-$PLUGIN_NAME.log"
+    #make release 2>&1 | tee "$MY_SCRIPT_DIR/release-release-$PLUGIN_NAME.log"
 done
